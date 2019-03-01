@@ -1,14 +1,24 @@
-require "bundler/setup"
-require "activerecord/records_on_load"
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
 
-RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
-  config.example_status_persistence_file_path = ".rspec_status"
+require 'rspec'
 
-  # Disable RSpec exposing methods globally on `Module` and `main`
-  config.disable_monkey_patching!
+Bundler.require
 
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'test')
+
+class User < ActiveRecord::Base
+end
+
+ActiveRecord::Migration.verbose = false
+
+unless ActiveRecord::Base.connection.table_exists?('users')
+  class CreateUserTable < ActiveRecord::Migration[4.2]
+    def up
+      create_table(:users) { |t| t.string :name }
+    end
   end
+  CreateUserTable.new.up
 end

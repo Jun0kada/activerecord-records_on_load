@@ -22,7 +22,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+User.all.on_load do |records|
+  puts "User #{records.size} records just loaded!"
+end
+
+User.all.on_load do |records|
+  ActiveRecord::Associations::Preloader.new.preload(records.select(&:admin?), :role)
+end
+```
 
 ## Development
 
