@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Add hook on activerecord records loaded'
   spec.description   = 'Add hook on activerecord records loaded'
-  spec.homepage      = 'https://github.com/Jun0kada'
+  spec.homepage      = 'https://github.com/Jun0kada/activerecord-records_on_load'
   spec.license       = 'MIT'
 
   spec.require_paths = ['lib']
