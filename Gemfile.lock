@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    activerecord-records_on_load (0.1.3)
+    activerecord-records_on_load (0.1.4)
       activerecord
 
 GEM
