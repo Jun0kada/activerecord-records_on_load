@@ -7,18 +7,15 @@ Bundler.require
 
 require 'active_record'
 
-ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'test')
+ActiveRecord::Base.configurations[:test] = {
+  adapter: 'sqlite3',
+  database: ':memory:'
+}
+
+ActiveRecord::Base.establish_connection(ActiveRecord::Base.configurations[:test])
 
 class User < ActiveRecord::Base
 end
 
 ActiveRecord::Migration.verbose = false
-
-unless ActiveRecord::Base.connection.table_exists?('users')
-  class CreateUserTable < ActiveRecord::Migration[4.2]
-    def up
-      create_table(:users) { |t| t.string :name }
-    end
-  end
-  CreateUserTable.new.up
-end
+ActiveRecord::MigrationContext.new(File.expand_path("../db/migrate", __FILE__)).up

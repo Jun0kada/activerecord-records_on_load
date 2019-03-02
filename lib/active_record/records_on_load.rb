@@ -4,7 +4,9 @@ module ActiveRecord
       super(&block)
 
       if @_on_load_blocks.present?
-        @_on_load_blocks.each { |b| b.call(@records) }
+        @_on_load_blocks.each do |b|
+          b.call(@records)
+        end
       end
 
       self
@@ -13,7 +15,7 @@ module ActiveRecord
     def on_load(&block)
       @_on_load_blocks ||= []
       @_on_load_blocks << block
-      self
+      clone
     end
   end
 end
