@@ -3,19 +3,29 @@ module ActiveRecord
     def load(&block)
       super(&block)
 
-      if @_on_load_blocks.present?
-        @_on_load_blocks.each do |b|
-          b.call(@records)
-        end
+      on_load_block_values.each do |block|
+        block.call(@records)
       end
 
       self
     end
 
     def on_load(&block)
-      @_on_load_blocks ||= []
-      @_on_load_blocks << block
-      clone
+      raise ArgumentError, 'The method .on_load() must contain block argument.' unless block
+      spawn.on_load!(&block)
+    end
+
+    def on_load!(&block)
+      self.on_load_block_values += [block]
+      self
+    end
+
+    def on_load_block_values
+      @on_load_block_values || []
+    end
+
+    def on_load_block_values=(value)
+      @on_load_block_values = value
     end
   end
 end
