@@ -1,4 +1,5 @@
 # Activerecord::RecordsOnLoad
+[![Build Status](https://travis-ci.org/Jun0kada/activerecord-records_on_load.svg?branch=master)](https://travis-ci.org/Jun0kada/activerecord-records_on_load)
 
 ## Installation
 
