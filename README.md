@@ -32,6 +32,9 @@ User.all.on_load do |records|
 end
 ```
 
+ [gem 'activerecord-preload_block'](https://github.com/Jun0kada/activerecord-preload_block)
+is also helpful for customizing preload
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/activerecord-records_on_load. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
